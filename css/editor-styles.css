@@ -1,0 +1,401 @@
+/*-------------------------------------------
+変数管理
+-------------------------------------------*/
+:root{
+	/* FONT */
+	--logo-font:"Oswald", sans-serif;
+	--body-font:"Zen Kaku Gothic New", sans-serif;
+
+	/* COLOR */
+	--font-color:#3c3c3c;
+	--emphasize-color:#da6d24;
+	--bg-body:#f5deb3;
+	--bg-main:#fff;
+	--btn-bg:#8b4513;
+	--btn-hover:#ccc;
+	--btn-text:#fff;
+	--btn-text-hover:#000;
+	--title-underline:#d3a415;
+	--li-hover:#ccc;
+}
+
+/*-------------------------------------------
+カラーパレットの設定
+-------------------------------------------*/
+.has-dark-gray-background-color{
+	background-color: #3c3c3c;
+}
+.has-dark-gray-color{
+	background-color: #3c3c3c;
+}
+
+.has-orange-background-color{
+	background-color:#da6d24;
+}
+.has-orange-color{
+	background-color:#da6d24;
+}
+
+.has-cream-background-color{
+	background-color:#f5deb3;
+}
+.has-cream-color{
+	background-color:#f5deb3;
+}
+
+.has-brown-background-color{
+	background-color:#8b4513;
+}
+.has-brown-color{
+	background-color:#8b4513;
+}
+
+.has-dark-yellow-background-color{
+	background-color:#d3a415;
+}
+.has-dark-yellow-color{
+	background-color:#d3a415;
+}
+
+/*-------------------------------------------
+ボタンブロックの設定
+-------------------------------------------*/
+.wp-block-button__link{
+    background: var(--btn-bg);
+	margin-bottom: 2rem;
+	padding: 1rem;
+	font-size: 1rem;
+	color: var(--btn-text);
+	border-radius: 8px;
+	border: 0;
+	cursor: pointer;
+}
+
+.wp-block-button__link:hover{
+	background: var(--btn-hover);
+	color: var(--btn-text-hover);
+}
+
+/*-------------------------------------------
+共通部分
+-------------------------------------------*/
+html {
+    font-size: 100%;
+}
+
+body {
+	font-family: var(--body-font);
+	font-weight: 400;
+}
+
+main{
+	background: var(--bg-main);
+}
+
+img{
+	max-width: 100%;
+    vertical-align: bottom;
+}
+
+a{
+	display: block;
+    text-decoration: none;
+}
+
+p{
+	line-height: 1.7;
+}
+
+.fadein{
+	opacity: 0;
+}
+
+/* Layout */
+.wrap{
+	max-width: 1200px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.inner-wrap{
+	max-width: 1000px;
+	width: 94%;
+	margin: 0 auto;
+	padding: 3rem 0;
+}
+
+section{
+	margin: 3.5rem 0;
+}
+.flex{
+	display: flex;
+}
+
+/*PAGINATION */
+.content-nav a{
+	display: inline-block;
+}
+
+.content-nav-next{
+	text-align: right;
+}
+
+/* Heading */
+.section-title{
+	padding: 0.5rem 0;
+	margin-bottom: 1.8rem;
+    border-bottom: 3px dotted var(--title-underline);
+	font-size: 1.5rem;
+	font-weight: bold;	
+}
+
+h3{
+	margin-bottom: .5rem;
+	font-size: 1.3rem;
+	font-weight: bold;
+	color: var(--emphasize-color);
+}
+
+/*-------------------------------------------
+HEADER
+-------------------------------------------*/
+header .wrap{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1rem;
+}
+
+.logo{
+	font-size: 2rem;
+	font-family: var(--logo-font);
+	font-weight: 700;
+}
+
+/*-------------------------------------------
+ハンバーガーメニュー
+-------------------------------------------*/
+.header-nav{
+	background: var(--bg-body);
+	width: 0;
+	position: absolute;
+	z-index: 2;
+	top: 50px;
+	right: 0;
+	overflow: hidden;
+	transition: .5s;
+}
+
+.header-nav li{
+	margin: 3rem 0;
+	text-align: center;
+	font-size: 1.25rem;
+	opacity: 0;
+}
+
+.btn-menu::before{
+	font-family: "Font Awesome 6 Free";
+	content:'\f0c9';
+	font-size: 2rem;
+	font-weight: 900;
+	padding-right: 3px;
+}
+
+.header-nav.open-menu{
+	width: 100%;
+}
+
+.btn-menu.close-menu::before{
+	position: relative;
+	z-index: 3;
+	font-family: "Font Awesome 6 Free";
+	content:'\f00d';
+	font-size: 2rem;
+	font-weight: 900;
+	padding-right: 3px;
+}
+
+/*-------------------------------------------
+TOP PAGE
+-------------------------------------------*/
+/* fv */
+.fv img{
+	width: 100%;
+	max-width: 1920px;
+	object-fit: cover;
+}
+
+/* EVENT */
+.home li{
+	text-align: center;
+}
+
+.event-thumbnail{
+	margin-bottom: .5rem;
+}
+
+/*-------------------------------------------
+MENU PAGE & GOODS PAGE 
+-------------------------------------------*/
+.menu p,
+.goods p{
+	margin-top: .5rem;
+}
+
+.goods img,
+.menu img{
+	margin-top: 5rem;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	filter: blur(20px);
+}
+
+/*-------------------------------------------
+EVENT PAGE 
+-------------------------------------------*/
+.post-categories a::before{
+	content: "#";
+}
+
+/* ARCHIVE-PAGE */
+.archive .flex{
+	display: flex;
+	gap: 3rem;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* loop */
+.loop-post-img{
+	width: 350px;
+	object-fit: cover;
+	margin-bottom: 1rem;
+}
+
+.loop-post-item {
+    margin-bottom: 3rem;
+}
+
+/*-------------------------------------------
+ACCESS PAGE
+-------------------------------------------*/
+.metaslider {
+	margin: 0 auto;
+}
+
+.wp-block-table{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.wp-block-table tr{
+    font-size: 1.3rem;
+    margin-bottom: .5em;
+    line-height: 1.7;
+}
+
+.wp-block-table th{
+    font-weight: normal;
+}
+
+.wp-block-table td{
+    padding-left: 1rem;
+}
+
+iframe {
+	width: 100%;
+	aspect-ratio: 3 / 2;
+}
+
+/*-------------------------------------------
+FOOTER
+-------------------------------------------*/
+footer {
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+.footer-nav{
+	margin: 2rem 0;
+	justify-content: center;
+	gap: 1.5rem;
+}
+
+/*-------------------------------------------
+レスポンシブ
+-------------------------------------------*/
+@media (min-width: 700px) {
+    /* 700px以上に適用されるCSS（デスクトップ用） */
+
+/* 共通 */
+	/* Button */
+	.btn{
+		width: 50%;
+	}
+
+	.btn-area{
+		display: flex;
+		flex-flow: column;
+		align-items: center;
+	}
+
+	/* Layout */
+	section{
+		margin: 6rem 0;
+	}
+
+/* HEADER */
+	.header-nav{
+		width: 100%;
+		display: flex;
+		gap: 1rem;
+	}
+
+	.header-nav li:hover{
+		background: var(--li-hover);
+	}
+
+	.header-nav a{
+		padding: 1rem;
+	}
+
+/* ハンバーガーメニューにしない	 */
+	.btn-menu{
+		display: none;
+	}
+
+	.header-nav{
+		position: static;
+	}
+
+	.header-nav li{
+		margin: 0;
+		opacity: 1;
+	}
+
+/* ACCESS PAGE */
+	iframe{
+		width: 50%;
+	}
+
+/* EVENT PAGE */
+	.archive .flex{
+		flex-direction: row;
+	}
+
+/* FOOTER */
+	.footer-nav {
+		display: flex;
+		justify-content: center;
+	}
+	.footer-nav li {
+		margin: 0 .75rem;
+	}
+	.footer-nav li:hover {
+		color: var(--li-hover);
+	}
+}
+
+
+
