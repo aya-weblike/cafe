@@ -1,0 +1,209 @@
+//色
+$color-font:#3c3c3c;
+$color-base:#f5deb3;
+$color-main:#da6d24;
+$color-accent:#8b4513;
+$color-btn-hover:#ccc;
+$color-btn-text:#fff;
+
+
+/*------------------------------------------
+共通
+-------------------------------------------*/
+body{
+	@include font-regular;
+	color: $color-font;
+}
+
+img{
+	width: 100%;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+a{
+	display: inline-block;
+}
+
+// レイアウト
+.wrap {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 4%;
+}
+
+main{
+	margin-top: 3.75rem; // ヘッダーの高さ分下げる
+	margin-bottom: 4rem;
+}
+
+// 文字
+h2{
+	color: $color-main;
+	font-size: 1.5rem;
+}
+
+h3{
+	@include font-bold;
+	margin-top: .3rem;
+	font-size: 1.2rem;
+}
+
+p{
+	line-height: 1.5;
+}
+
+.section-title{
+	padding: 3rem 0;
+	@include desktop{
+		padding: 5rem 0;
+	}
+	h1{
+		@include font-en;
+		font-size: 1.5rem;
+	}
+	h1::after{
+		@include underline;
+	}
+	
+}
+
+// ページ送り
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+	margin-top: 5rem;
+	a{
+		padding: .75rem 1rem .85rem;
+		background: $color-main;
+		border-radius: 6px;
+		color: $color-btn-text;
+		&:hover{
+			background: $color-btn-hover;
+			color: $color-font;
+		}
+	}
+}
+
+// タグのデザイン
+.content-tags {
+	margin-top: 5rem;
+	font-size: 0.875rem;
+	li {
+		display: inline-block;
+		margin-right: .3em;
+	}
+	a {
+		display: block;
+		padding: .3em .7em;
+		text-decoration: none;
+		color: $color-accent;
+		border: 1px solid $color-accent;
+		border-radius: 1em;
+	}
+}
+
+
+/*-------------------------------------------
+カラーパレット
+-------------------------------------------*/
+.has-color-font{
+	&-background-color{
+		background-color: #3c3c3c;
+	}
+	&-color{
+		color:#3c3c3c;
+	}
+}
+.has-color-base{
+	&-background-color{
+		background-color: #f5deb3;
+	}
+	&-color{
+		color:#f5deb3;
+	}
+}
+.has-color-main{
+	&-background-color{
+		background-color: #da6d24;
+	}
+	&-color{
+		color:#da6d24;
+	}
+}
+.has-color-accent{
+	&-background-color{
+		background-color: #8b4513;
+	}
+	&-color{
+		color:#8b4513;
+	}
+}
+.has-color-btn-hover{
+	&-background-color{
+		background-color: #ccc;
+	}
+	&-color{
+		color:#ccc;
+	}
+}
+.has-color-btn-text{
+	&-background-color{
+		background-color: #fff;
+	}
+	&-color{
+		color:#fff;
+	}
+}
+
+/*-------------------------------------------
+フォントスタイル
+-------------------------------------------*/
+.has-x-small-font-size{
+	font-size: 0.75rem;
+}
+.has-small-font-size{
+	font-size: 0.875rem;
+}
+.has-normal-font-size{
+	font-size: 1rem;
+}
+.has-large-font-size{
+	font-size: 1.125rem;
+}
+.has-huge-font-size{
+	font-size: 1.5rem;
+}
+
+/*-------------------------------------------
+ボタンスタイル
+-------------------------------------------*/
+// 標準ボタン
+.wp-block-button.is-style-normal-btn .wp-block-button__link{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $color-main;
+	color: $color-btn-text;
+	&:hover{
+		background-color: $color-btn-hover;
+		color: $color-font;
+	}
+}
+// 幅固定
+.wp-block-button.is-style-fixed .wp-block-button__link{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $color-main;
+	color: $color-btn-text;
+	width: 80vw;
+	max-width: 40em;
+	font-size: 1rem;
+	&:hover{
+		background-color: $color-btn-hover;
+		color: $color-font;
+	}
+}

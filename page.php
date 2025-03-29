@@ -1,18 +1,25 @@
-<?php get_header(); ?>
-		<!-- メイン -->
-		<main>
-			<div class="inner-wrap">
-				<?php if(have_posts()): ?>
-					<?php 
-						while(have_posts()):
-						the_post();
-						?>
-						<section class="page-desc">
-							<h2 class="section-title fadein"><?php the_title(); ?></h2>
-						</section>
-						<?php the_content(); ?>
-					<?php endwhile; ?>
-				<?php endif; ?>
+<?php get_header();?>
+
+<!-- メイン -->
+<main>
+	<?php if(have_posts()):?>
+		<?php
+		while (have_posts()):
+			the_post();
+			?>
+			<div class="wrap">
+				<section class="section-title">
+					<h1>
+						<?php the_title();?>
+					</h1>
+				</section>
+
+				<article id="post-<?php the_ID();?>" <?php post_class();?>>
+					<?php the_content();?>
+				</article>
 			</div>
-		</main>
+		<?php endwhile;?>
+	<?php endif;?>
+</main>
 <?php get_footer(); ?>
+

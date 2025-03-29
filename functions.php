@@ -1,88 +1,214 @@
 <?php
-function add_files(){
-	// リセットCSS
-	wp_enqueue_style('reset-style' , 'https://unpkg.com/destyle.css@1.0.5/destyle.css');
-	// Google Fonts
-	wp_enqueue_style('google-fonts','https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Zen+Kaku+Gothic+New&display=swap');
-	// メインのCSSファイル
-	wp_enqueue_style('main-style' , get_stylesheet_uri());
-	// JavaScriptファイル
-	wp_enqueue_script('font-awesome', 'https://kit.fontawesome.com/44a6871718.js', array(), '' , false);
-	wp_enqueue_script('main-script', get_theme_file_uri().'/js/script.js', array(), '', true ); 
-}
-add_action('wp_enqueue_scripts','add_files');
-
-function theme_setup(){
-	// ブロック用のCSSを有効化する
-	add_theme_support('wp-block-styles');
-
-	// 埋め込みブロックのレスポンシブ化
-	add_theme_support('responsive-embeds');
-
-	// 幅広スタイルの対応
-	add_theme_support('align-wide');
-
-	// アイキャッチ画像有効
-	add_theme_support( 'post-thumbnails' );
-	add_filter( 'post_thumbnail_html', 'custom_attribute' );
-	function custom_attribute( $html ){
-		// width height を削除する
-		$html = preg_replace('/(width|height)="\d*"\s/', '', $html);
-		return $html;
-	}
-
-	// titleタグ
+/*-------------------------------------------
+特定の機能をテーマに追加する
+-------------------------------------------*/
+function cafe_theme_setup(){
+	// ページタイトル出力
 	add_theme_support('title-tag');
 
-	// メニュー
+	// ナビゲーションメニュー
 	register_nav_menus(
 		array(
 			'main-menu' => 'メインメニュー',
 		)
 	);
 
-	// カラーパレットの設定
+	// アイキャッチ
+	add_theme_support('post-thumbnails');
+	add_image_size('page_eyecatch',1100,610,true);
+	add_image_size('archive_thumbnail',200,150,true);
+	
+}
+add_action('after_setup_theme','cafe_theme_setup');
+
+/*-------------------------------------------
+ウィジェット
+-------------------------------------------*/
+function cafe_widgets_init(){
+	register_sidebar(
+		array(
+		'name' => 'オリジナルウィジェット', // 任意のウィジェット名
+		'id' => 'event-widget', // 任意のウィジェットのID名
+		'description' => 'イベント情報のウィジェット',
+		'before_widget' => '<div id="%1s" class="%2s">', // ウィジェット直前のHTML
+		'after_widget' => '</div>', // ウィジェット直後のHTML
+		)
+	);
+}
+add_action('widgets_init','cafe_widgets_init');
+
+
+/*-------------------------------------------
+テーマ独自のファイルを読み込む
+-------------------------------------------*/
+function add_files(){
+	// リセットCSS
+	wp_enqueue_style(
+		'reset-style',
+		'https://unpkg.com/destyle.css@1.0.5/destyle.css'
+	);
+
+	// Google Fonts
+	wp_enqueue_style(
+		'google-fonts',
+		'https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap'
+	);
+
+	// メインのCSSファイル
+	wp_enqueue_style(
+		'main-style', 
+		get_theme_file_uri().'/assets/css/style.min.css',
+	);
+
+	// テーマ独自のCSSファイル
+	wp_enqueue_style(
+		'theme-style', 
+		get_theme_file_uri().'/assets/css/theme-styles.min.css',
+	);
+
+	// jQuery
+	wp_enqueue_script('jquery');
+
+	// JSファイル
+	wp_enqueue_script(
+		'main-script',
+		get_theme_file_uri().'/assets/js/script.js',
+		array(),
+		'1.0.0',
+		true
+	);
+			
+	// Font awesome
+	wp_enqueue_script(
+		'fontawesome',
+		'https://kit.fontawesome.com/44a6871718.js',
+		array(), 
+		'1.0.0',
+		true
+	);
+	add_filter('script_loader_tag', 'custom_script_loader_tag', 10, 2);
+		function custom_script_loader_tag($tag, $handle) {
+		if($handle !== 'fontawesome') {
+		return $tag;
+		}
+		return str_replace('></script>', ' crossorigin="anonymous"></script>', $tag);
+	}
+}
+add_action('wp_enqueue_scripts','add_files');
+
+/*-------------------------------------------
+テーマをブロックエディタに対応させる
+-------------------------------------------*/
+function cafe_block_setup(){
+	// ブロック用のCSSを有効化
+	add_theme_support('wp-block-styles');
+
+	// 埋め込みブロックのレスポンシブ化
+	add_theme_support('responsive-embeds');
+
+	// コンテンツ幅の拡張
+	add_theme_support('align-wide');
+
+	// カラーパレット
 	add_theme_support(
 		'editor-color-palette',
 		array(
 			array(
-				'name' => 'ダークグレー',
-				'slug' => 'dark-gray',
+				'name' => '文字色',
+				'slug' => 'color-font',
 				'color' => '#3c3c3c',
 			),
 			array(
-				'name' => 'オレンジ',
-				'slug' => 'orange',
-				'color' => '#da6d24',
-			),
-			array(
-				'name' => 'クリーム',
-				'slug' => 'cream',
+				'name' => 'ベースカラー',
+				'slug' => 'color-base',
 				'color' => '#f5deb3',
 			),
 			array(
-				'name' => 'ブラウン',
-				'slug' => 'brown',
+				'name' => 'メインカラー',
+				'slug' => 'color-main',
+				'color' => '#da6d24',
+			),
+			array(
+				'name' => 'アクセントカラー',
+				'slug' => 'color-accent',
 				'color' => '#8b4513',
 			),
 			array(
-				'name' => 'ダークイエロー',
-				'slug' => 'dark-yellow',
-				'color' => '#d3a415',
+				'name' => 'ボタンホバー',
+				'slug' => 'color-btn-hover',
+				'color' => '#ccc',
+			),
+			array(
+				'name' => 'ボタンテキスト',
+				'slug' => 'color-btn-text',
+				'color' => '#fff',
+			),
+		)
+	);
+	// フォントスタイル指定
+	add_theme_support(
+		'editor-font-sizes',
+		array(
+			array(
+				'name' => '極小',
+				'size' => '12',
+				'slug' => 'x-small'
+			),
+			array(
+				'name' => '小',
+				'size' => '14',
+				'slug' => 'small'
+			),
+			array(
+				'name' => '標準',
+				'size' => '16',
+				'slug' => 'normal'
+			),
+			array(
+				'name' => '大',
+				'size' => '18',
+				'slug' => 'large'
+			),
+			array(
+				'name' => '特大',
+				'size' => '24',
+				'slug' => 'huge'
 			),
 		)
 	);
 
-	// 独自のエディタースタイルを有効化する
+	// エディター側にスタイルを適用させる
 	add_theme_support('editor-styles');
-	add_editor_style('css/editor-styles.css');
-	add_editor_style('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Zen+Kaku+Gothic+New&display=swap');
+	add_editor_style('/assets/css/editor-styles.min.css');
+	add_editor_style('https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap');
 
 }
-add_action('after_setup_theme','theme_setup');
+add_action('after_setup_theme','cafe_block_setup');
 
+/*-------------------------------------------
+コアブロックのスタイル
+-------------------------------------------*/
+function cafe_block_style_setup(){
+	register_block_style(
+		'core/button',
+		array(
+			'name' => 'normal-btn',
+			'label' => '標準ボタン',
+		)
+	);
+	register_block_style(
+		'core/button',
+		array(
+			'name' => 'fixed',
+			'label' => '幅固定',
+		)
+	);
+}
+add_action('after_setup_theme','cafe_block_style_setup');
 
-// 固定ページのbodyにスラッグ名をクラスで出す
+/*-------------------------------------------
+固定ページのbodyにスラッグ名をクラスで出す
+-------------------------------------------*/
 function my_body_class($classes)
 {
     if (is_page()) {
@@ -92,29 +218,3 @@ function my_body_class($classes)
     return $classes;
 }
 add_filter('body_class', 'my_body_class');
-
-// ショートコードを使って投稿一覧の記事を任意の数だけ表示
-function aya_event_shortcode() {
-	global $post;
-	$args = array(
-	'post_type'      => 'post',
-	'posts_per_page' => 1,
-	'post_status'    => 'publish'
-	);
-	$posts_array = get_posts($args);
-	$html = '<ul>';
-		foreach($posts_array as $post): // loop開始
-			setup_postdata($post);
-			$html .= '<li><a href="'.get_permalink().'">'; // 記事URLを取得
-			$html .= '<div class="event-thumbnail"><img src="'.get_the_post_thumbnail_url().'" alt="'.get_the_title().'"></div>'; //アイキャッチ画像表示
-			$html .= '<time datetime="'.get_the_date( DATE_W3C ).'">'.get_the_date().'</time>'; // 投稿日を表示
-			$html .= '<p>'.get_the_title().'</p>'; // タイトルを表示
-			$html .= '</a></li>';
-		endforeach; // loop終了
-	$html.='</ul>';
-	wp_reset_postdata();
-	return $html;
-}
-add_shortcode('my_post_list', 'aya_event_shortcode');
-
-

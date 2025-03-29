@@ -1,5 +1,4 @@
 <?php get_header();?>
-
 <!-- メイン -->
 <main>
 	<div class="wrap">
@@ -8,7 +7,7 @@
 				<?php if(is_month()): ?>
 					<?php echo get_the_date('Y年n月');?>
 				<?php else: ?>
-					<?php post_type_archive_title();?>
+					<?php single_term_title();?>
 				<?php endif; ?>
 			</h1>
 		</section>
@@ -17,7 +16,7 @@
 			while (have_posts()):
 				the_post();
 				?>
-				<?php get_template_part('template-parts/loop','post');?>
+				<?php get_template_part('template-parts/loop','event');?>
 			<?php endwhile; ?>
 		<?php endif; ?>
 		<!-- ページ送り -->

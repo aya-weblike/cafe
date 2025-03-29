@@ -1,0 +1,110 @@
+//色
+$color-font:#3c3c3c;
+$color-base:#f5deb3;
+$color-main:#da6d24;
+$color-accent:#8b4513;
+$color-btn-hover:#ccc;
+$color-btn-text:#fff;
+
+
+/*-------------------------------------------
+カラーパレット
+-------------------------------------------*/
+.has-color-font{
+	&-background-color{
+		background-color: #3c3c3c;
+	}
+	&-color{
+		color:#3c3c3c;
+	}
+}
+.has-color-base{
+	&-background-color{
+		background-color: #f5deb3;
+	}
+	&-color{
+		color:#f5deb3;
+	}
+}
+.has-color-main{
+	&-background-color{
+		background-color: #da6d24;
+	}
+	&-color{
+		color:#da6d24;
+	}
+}
+.has-color-accent{
+	&-background-color{
+		background-color: #8b4513;
+	}
+	&-color{
+		color:#8b4513;
+	}
+}
+.has-color-btn-hover{
+	&-background-color{
+		background-color: #ccc;
+	}
+	&-color{
+		color:#ccc;
+	}
+}
+.has-color-btn-text{
+	&-background-color{
+		background-color: #fff;
+	}
+	&-color{
+		color:#fff;
+	}
+}
+
+/*-------------------------------------------
+フォントスタイル
+-------------------------------------------*/
+.has-x-small-font-size{
+	font-size: 0.75rem;
+}
+.has-small-font-size{
+	font-size: 0.875rem;
+}
+.has-normal-font-size{
+	font-size: 1rem;
+}
+.has-large-font-size{
+	font-size: 1.125rem;
+}
+.has-huge-font-size{
+	font-size: 1.5rem;
+}
+
+/*-------------------------------------------
+ボタンスタイル
+-------------------------------------------*/
+// 標準ボタン
+.wp-block-button.is-style-normal-btn .wp-block-button__link{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $color-main;
+	color: $color-btn-text;
+	&:hover{
+		background-color: $color-btn-hover;
+		color: $color-font;
+	}
+}
+// 幅固定
+.wp-block-button.is-style-fixed .wp-block-button__link{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $color-main;
+	color: $color-btn-text;
+	width: 80vw;
+	max-width: 40em;
+	font-size: 1rem;
+	&:hover{
+		background-color: $color-btn-hover;
+		color: $color-font;
+	}
+}

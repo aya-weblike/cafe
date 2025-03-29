@@ -1,0 +1,571 @@
+@charset 'UTF-8';
+
+/*-------------------------------------------
+変数管理
+-------------------------------------------*/
+//色
+$color-font:#3c3c3c;
+$color-base:#f5deb3;
+$color-main:#da6d24;
+$color-accent:#8b4513;
+$color-btn-hover:#ccc;
+$color-btn-text:#fff;
+
+// レギュラーフォント
+@mixin font-regular {
+	font-family: "Zen Kaku Gothic New", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+// 太字
+@mixin font-bold {
+	font-family: "Zen Kaku Gothic New", sans-serif;
+	font-weight: 700;
+	font-style: normal;
+}
+
+// 英語フォント
+@mixin font-en{
+	font-family: "Oswald", sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 600;
+	font-style: normal;
+}
+
+// H2の下線
+@mixin underline{
+	content: '';
+	display: block;
+	height: 5px;
+	width: 4rem;
+	background: $color-accent;
+	margin-top: .5rem;
+}
+
+// ボタン
+@mixin btn{
+	color: $color-btn-text;
+	background: $color-main;
+	font-size: 1.5rem;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-block;
+	padding: 10px 20px;
+	&:hover{
+		color: $color-font;
+		background: $color-btn-hover;
+	}
+}
+
+// メディアクエリ
+$bp:600px; //ブレイクポイント
+
+@mixin desktop{
+	@media(min-width:($bp)){
+		@content;
+	}
+}
+
+/*------------------------------------------
+共通
+-------------------------------------------*/
+html{
+	font-size: 100%;
+}
+
+body{
+	@include font-regular;
+	color: $color-font;
+}
+
+img{
+	width: 100%;
+	max-width: 100%;
+	object-fit: contain;
+}
+
+a{
+	display: inline-block;
+}
+
+// レイアウト
+.wrap {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 4%;
+}
+
+main{
+	margin-top: 3.75rem; // ヘッダーの高さ分下げる
+	margin-bottom: 4rem;
+	@include desktop{
+		margin-top: 5rem;
+	}
+}
+
+// 文字
+h2{
+	color: $color-main;
+	font-size: 1.5rem;
+}
+
+h3{
+	@include font-bold;
+	margin-top: .3rem;
+	font-size: 1.2rem;
+}
+
+p{
+	line-height: 1.5;
+}
+
+.section-title{
+	padding: 3rem 0;
+	@include desktop{
+		padding: 5rem 0;
+	}
+	h1{
+		@include font-en;
+		font-size: 1.5rem;
+	}
+	h1::after{
+		@include underline;
+	}
+	
+}
+
+// ページ送り
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+	margin-top: 5rem;
+	a{
+		padding: .75rem 1rem .85rem;
+		background: $color-main;
+		border-radius: 6px;
+		color: $color-btn-text;
+		&:hover{
+			background: $color-btn-hover;
+			color: $color-font;
+		}
+	}
+}
+
+// タグのデザイン
+.content-tags {
+	margin-top: 5rem;
+	font-size: 0.875rem;
+	li {
+		display: inline-block;
+		margin-right: .3em;
+	}
+	a {
+		display: block;
+		padding: .3em .7em;
+		text-decoration: none;
+		color: $color-accent;
+		border: 1px solid $color-accent;
+		border-radius: 1em;
+	}
+}
+
+
+
+/*-------------------------------------------
+ヘッダー
+-------------------------------------------*/
+.header{
+	width: 100%;
+	height: 3.75rem;
+	position: fixed;
+	top: 0;
+	background-color: $color-base;
+	z-index: 1;
+	@include desktop{
+		height: 5rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 4%;
+	}
+	.header-inner {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.logo{
+		width: 6.25rem;
+		@include desktop{
+			width: 9rem;
+		}
+	}
+
+}
+
+/* ハンバーガーメニューボタン */
+.hamburger{
+	display: inline-block;
+	width: 60px;
+	height: 60px;
+	pointer-events: all;
+	@include desktop{
+		display: none;
+		pointer-events: none;
+	}
+	span{
+		position: absolute;
+		top: 20px;
+		right: 15px;
+		display: inline-block;
+		width: 30px;
+		height: 3px;
+		background-color: black;
+		&:nth-child(2) {
+			margin-top: 10px;
+		}
+		&:last-child {
+			margin-top: 20px;
+		}
+	}
+}
+
+/* メニューが開いた時(.openが付く)→バツにする */
+.hamburger.open{
+	span{
+		position: absolute;
+		top: 30px;
+		margin: 0;
+		&:first-child{
+			transform: rotate(45deg);
+		}
+		&:nth-child(2){
+			display: none;
+		}
+		&:last-child{
+			transform: rotate(-45deg);
+		}
+	}
+}
+
+
+/* ナビゲーション */
+.header-nav{
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: calc(100% - 3.75rem); /* 全体の画面高さーheaderの高さ */
+	background-color: $color-base;
+	@include desktop{
+		height: 5rem;
+		display: inline-block;
+		position: static;
+	}
+	ul{
+		@include font-bold;
+		@include font-en;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 1.2rem;
+		text-align: center;
+		@include desktop{
+			height: 5rem;
+			position: static;
+			transform: none;
+			display: flex;
+			justify-content: flex-end;
+			gap: 2rem;
+			align-items: center;
+		}
+	}
+	li:not(:last-child){
+		margin-bottom: 2rem;
+		@include desktop{
+			margin-bottom: 0;
+		}
+	}	
+	a{
+		padding: 2rem;
+		@include desktop{
+			padding: 1rem;
+		}
+	}
+}
+
+
+/*-------------------------------------------
+トップページ
+-------------------------------------------*/
+.home{
+	main{
+		margin-bottom: 0;
+	}
+	article{
+		margin: 5rem 0;
+	}
+	h2::after{
+		@include underline;
+	}
+}
+
+// イベントインフォメーション
+.home .event-info{
+	text-align: center;
+	h2{
+		margin-bottom: 3rem;
+	}
+	h2::after{
+		position:absolute;
+		left:50%;
+		transform: translateX(-50%)
+	}
+	p{
+		margin: 1rem 0;
+	}
+	.archive-item-link {
+		flex-flow: column-reverse;
+	}
+	.archive-item-img{
+		margin: 2rem auto 0;
+	}
+}
+
+// こだわり
+.home .kodawari-area{
+	section{
+		margin: 1rem 0;
+		@include desktop{
+			margin: 3rem 0;
+		}
+	}
+	h2{
+		@include font-bold;
+		margin-bottom: 1rem;
+	}
+	@include desktop{
+		display: flex;
+		align-items: center;
+	}
+}
+
+// メニュー
+.home .menu-area{
+	@include desktop{
+		display: flex;
+		align-items: center;
+		gap: 3rem;
+	}
+	section{
+		margin: 3rem 0;
+	}
+	h2{
+		@include font-en;
+		margin: 1rem 0;
+	}
+}
+
+// リンクボタン
+.home .link{
+	@include desktop{
+		text-align: center;
+	}
+	p{
+		margin: 2rem 0;
+	}
+	.btn{
+		@include btn;
+		display: block;
+		text-align: center;
+		@include desktop{
+			display: inline-block;
+			width: 50%;
+		}
+	}
+}
+
+/*-------------------------------------------
+メニューページ
+-------------------------------------------*/
+.menu{
+	p{
+		margin-top: .1em;
+		margin-left: .3em;
+	}
+}
+
+
+/*-------------------------------------------
+イベントページ
+-------------------------------------------*/
+.single{
+	.event-info{
+		text-align: center;
+		h3{
+			margin-top: 3rem;
+		}
+		p{
+			margin: 2rem 0;
+		}
+	}
+	.thumbnail{
+		@include desktop{
+			width: 50%;
+			margin-inline: auto;
+		}	
+	}
+	.content-meta{
+		font-size: 0.8rem;
+		margin-top: 1rem;
+		&-date{
+			@include font-en;
+			font-weight: 400;
+			&::before{
+				content: "/";
+				padding-right: .3em;
+			}	
+		}
+		a:not(:first-child){
+			padding: 0 .3em;
+		}
+	}
+}
+
+/*-------------------------------------------
+アクセスページ
+-------------------------------------------*/
+.access{
+	.map,
+	.store-info{
+		width: 100%;
+		max-width: 900px;
+		padding: 1rem;
+	}
+}
+
+.access .map{
+	margin: 5rem auto 0;
+	@include desktop{
+		margin: 10rem auto 0;
+	}
+	.gmap-iframe{
+	filter: grayscale(1);
+	width: 100%;
+	max-width: 900px;
+	height: 200px;
+	@include desktop{
+		height: 400px;
+	}
+	}
+}
+
+.access .store-info{
+	margin-inline: auto;
+	dl{
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		width: 100%;	
+	}
+	dt{
+		width: 25%;
+		margin-top: 10px;
+		@include desktop{
+			width: 15%;
+		}	
+		/* 1つめのdtにはmargin-topを設定しない */
+		&:first-of-type{
+			margin-top: 0;
+		}
+	}
+	dd{
+		width: 75%;
+		margin-top: 10px;
+		@include desktop{
+			width: 85%;
+		}
+		/*1つめのddにはmargin-topを設定しない*/
+		&:first-of-type{
+			margin-top: 0;
+		}
+	}
+}
+
+/*-------------------------------------------
+アーカイブページ
+-------------------------------------------*/
+.archive-content-wrap{
+	border-bottom: 1px dotted $color-accent;
+	&:first-of-type{
+		border-top: 1px dotted $color-accent;
+	}
+}
+
+.archive-item{
+	&-link {
+		display: flex;
+		text-decoration: none;
+		color: $color-font;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	&-img {
+		width: 30%;
+		margin-right: 15px;
+	}
+}
+
+.archive-content{
+	&-body {
+		flex: 1;
+		font-size: 0.9375rem;
+	}
+	&-title {
+		@include font-bold;
+		margin-bottom: .5em;
+	}
+	&-meta{
+		margin-top: 15px;
+		li {
+			display: inline-block;
+		}
+	}
+	&-category:after {
+		content: "/";
+	}		
+}
+
+
+
+/*-------------------------------------------
+フッター
+-------------------------------------------*/
+.footer{
+	.wrap{
+		padding-top: 1.5rem;
+		padding-bottom: 1rem;
+	}
+	background-color: $color-base;
+	&-nav{
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+		margin-bottom: 1rem;
+	}
+	p{
+		text-align: center;
+	}
+}
+
+/*-------------------------------------------
+404ページ
+-------------------------------------------*/
+.error404 {
+	.error-msg a{	
+		color: $color-main;
+		text-decoration: underline;
+	}
+}

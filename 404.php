@@ -1,15 +1,21 @@
-<?php get_header(); ?>
-		<!-- メイン -->
-		<main>
-			<div class="inner-wrap">
-				<section class="page-desc">
-					<h2 class="section-title fadein">ページが見つかりません</h2>
-				</section>
-				
-				<div>
-					<p>お探しのページは、移動または削除された可能性があります。</p>
-					<p><a href="<?php echo esc_url(home_url());?>">トップページ</a>よりお探しください。</p>
-				</div>
+<?php get_header();?>
+
+<!-- メイン -->
+<main>
+	<article>
+		<div class="wrap">
+			<section class="section-title">
+				<h1>
+					ページが見つかりません
+				</h1>
+			</section>
+			<div>
+				<p class="error-msg">
+					<a href="<?php echo esc_url(home_url());?>">トップページ</a>へ戻る。
+				</p>
 			</div>
-		</main>
-<?php get_footer(); ?>
+		</div>
+	</article>
+</main>
+
+<?php get_footer();?>

@@ -14,15 +14,15 @@
 							<?php the_title(); ?>
 						</h1>
 						<div class="content-meta">
-							<?php the_category(',');?>
+							<?php the_terms(get_the_ID(),'event');?>
 							<!-- 投稿日の取得 -->
 							<?php
-								$cafe_post_year = get_the_date('Y');
-								$cafe_post_month = get_the_date('m');
-							?>
-							<a class="content-meta-date" href="<?php echo get_month_link($cafe_post_year,$cafe_post_month);?>">
+                                $cafe_event_year = get_the_date('Y');
+                                $cafe_event_month = get_the_date('m');
+                            ?>
+							<span class="content-meta-date">
 								<time datetime="<?php echo get_the_date('Y-m-d');?>"><?php echo get_the_date();?></time>
-							</a>
+							</span>
 						</div>
 					</section>
 					<section class="event-info">
@@ -49,8 +49,6 @@
 							<?php next_post_link('%link', '次の記事へ'); ?>
 						</div>
 					</div>
-
-
 				</div>
 			</article>
 		<?php endwhile;?>

@@ -17,7 +17,7 @@
 			while (have_posts()):
 				the_post();
 				?>
-				<?php get_template_part('template-parts/loop','post');?>
+				<?php get_template_part('template-parts/loop','event');?>
 			<?php endwhile; ?>
 		<?php endif; ?>
 		<!-- ページ送り -->
