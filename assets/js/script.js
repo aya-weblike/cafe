@@ -4,22 +4,11 @@ var $j = jQuery;
 /*-------------------------------------------
 ハンバーガーメニューの動き
 -------------------------------------------*/
-const ham = $j('#js-hamburger'); // ハンバーガーボタン3本線
-const nav = $j('#js-nav'); // ナビゲーション
-
-$j(function(){
-	// 上からスライドしたいときはこっちのコードを使う↓
-	$j(ham).click(function(){
-		$j(this).toggleClass('open');
-		$j(nav).slideToggle();
-	});
-
-	// リサイズのたびに判定して対応
-	$j(window).on('resize', function() {
-		if( 'none' == $j(ham).css('pointer-events') ){
-			$j(nav).attr('style','');
-		};
-	});
+const ham = $j('#js-hamburger');
+const nav = $j('#js-nav');
+ham.on('click', function () { //ハンバーガーメニューをクリックしたら
+  ham.toggleClass('active'); // ハンバーガーメニューにactiveクラスを付け外し
+  nav.toggleClass('active'); // ナビゲーションメニューにactiveクラスを付け外し
 });
 
 /*-------------------------------------------
